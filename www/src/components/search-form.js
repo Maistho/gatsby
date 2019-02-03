@@ -10,7 +10,7 @@ import SearchIcon from "./search-icon"
 const loadJS = () => import(`./docsearch.min.js`)
 let loadedJs = false
 
-import { injectGlobal } from "react-emotion"
+import { injectGlobal } from "emotion"
 
 const { curveDefault, speedDefault } = presets.animation
 
