@@ -4,6 +4,8 @@ import { SkipNavLink } from "@reach/skip-nav"
 import { OutboundLink } from "gatsby-plugin-google-analytics"
 import MdClose from "react-icons/lib/md/close"
 import { navigate, PageRenderer } from "gatsby"
+import { ThemeProvider } from 'emotion-theming'
+
 import presets, { colors } from "../utils/presets"
 import Banner from "../components/banner"
 import Navigation from "../components/navigation"
@@ -70,9 +72,11 @@ class DefaultLayout extends React.Component {
       isModal = true
     }
 
+
+    const theme = {contentBackground: '#000'}
     if (isModal && window.innerWidth > 750) {
       return (
-        <React.Fragment>
+      <ThemeProvider theme={theme}>
           <PageRenderer
             location={{ pathname: this.props.modalBackgroundPath }}
           />
@@ -142,11 +146,12 @@ class DefaultLayout extends React.Component {
               {this.props.modalNextLink}
             </div>
           </Modal>
-        </React.Fragment>
+      </ThemeProvider>
       )
     }
 
     return (
+      <ThemeProvider theme={theme}>
       <div className={isHomepage ? `is-homepage` : ``}>
         <SiteMetadata pathname={this.props.location.pathname} />
         <SkipNavLink css={styles.skipLink}>Skip to main content</SkipNavLink>
@@ -185,6 +190,7 @@ class DefaultLayout extends React.Component {
         </div>
         <MobileNavigation />
       </div>
+      </ThemeProvider>
     )
   }
 }
